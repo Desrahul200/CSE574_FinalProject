@@ -11,7 +11,7 @@ target_shape = (80, 160, 3)
 
 z_range = 10
 name = 'vae_64_augmentation'
-vae_dir = f'/home/albertomate/Documentos/carla/PythonAPI/my-carla/vae/log_dir/{name}'
+vae_dir = f'{name}'
 class VAEVisualizer:
     def __init__(self, model, device):
         self.model = model
@@ -131,10 +131,10 @@ if __name__ == '__main__':
     model.eval()
 
     # Initialize the VAE visualizer
-    image_path = '/home/albertomate/Documentos/carla/PythonAPI/my-carla/vae/images/rgb/520.png'  # path to the sample image
+    image_path = ''  # path to the sample image
 
     images_numbers = [520, 140, 254, 984]
-    image_path_list = [os.path.join('/home/albertomate/Documentos/carla/PythonAPI/my-carla/vae/images/rgb/', f'{i}.png') for i in images_numbers]
+    image_path_list = [os.path.join('', f'{i}.png') for i in images_numbers]
     visualizer = VAEVisualizer(model, device)
     visualizer.visualize(image_path)
     visualizer.compare_gt_and_pred(image_path_list)

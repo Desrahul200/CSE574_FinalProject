@@ -502,7 +502,7 @@ observation_space, encode_state_fn, decode_vae_fn = create_encode_state_fn(None,
 env = CarlaCollectDataRLEnv(obs_res=(160, 80), viewer_res=(160 * 7, 80 * 7),
                     reward_fn=reward_functions['reward_fn5'], encode_state_fn=encode_state_fn, decode_vae_fn=decode_vae_fn, observation_space=observation_space,
                     start_carla=True, fps=10, action_smoothing=0.7,
-                    action_space_type='continuous', activate_spectator=True, output_dir='/home/albertomate/Documentos/carla/PythonAPI/my-carla/vae/images2')
+                    action_space_type='continuous', activate_spectator=True, output_dir='')
 
 model = PPO('MultiInputPolicy', env, device='cpu')
 # model = PPO('MultiInputPolicy', env, verbose=1, device='cpu', **ppo_hyperparam)

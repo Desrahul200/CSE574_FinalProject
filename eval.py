@@ -7,7 +7,7 @@ import config
 parser = argparse.ArgumentParser(description="Eval a CARLA agent")
 parser.add_argument("--host", default="localhost", type=str, help="IP of the host server (default: 127.0.0.1)")
 parser.add_argument("--port", default=2000, type=int, help="TCP port to listen to (default: 2000)")
-parser.add_argument("--model", type=str, default="", required=True, help="Path to a model evaluate")
+parser.add_argument("--model", type=str, default="D:/ASU Homework/CSE 574/Project/CARLA-SB3-RL-Training-Environment/tensorboard/PPO/model_3000000_steps.zip", help="Path to a model evaluate")
 parser.add_argument("--no_render", action="store_false", help="If True, render the environment")
 parser.add_argument("--fps", type=int, default=15, help="FPS to render the environment")
 parser.add_argument("--no_record_video", action="store_false", help="If True, record video of the evaluation")
@@ -16,7 +16,7 @@ parser.add_argument("--config", type=str, default="1", help="Config to use (defa
 args = vars(parser.parse_args())
 config.set_config(args["config"])
 
-from stable_baselines3 import PPO, DDPG, SAC
+from stable_baselines3 import PPO
 
 from utils import VideoRecorder, parse_wrapper_class
 from carla_env.state_commons import create_encode_state_fn, load_vae
@@ -119,7 +119,7 @@ def run_eval(env, model, model_path=None, record_video=False):
 if __name__ == "__main__":
     model_path = args["model"]
 
-    algorithm_dict = {"PPO": PPO, "DDPG": DDPG, "SAC": SAC}
+    algorithm_dict = {"PPO": PPO}
     if CONFIG["algorithm"] not in algorithm_dict:
         raise ValueError("Invalid algorithm name")
 

@@ -7,10 +7,8 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 import argparse
 import config
 import time
-
 MAX_EPOCH_LIMIT = 3_000_000 # the training will stop when this timestamp is reached
 CHECKPOINT_FREQ = 100 # the number of check points for model to save at
-
 parser = argparse.ArgumentParser(description="Trains a CARLA agent")
 parser.add_argument("--host", default="localhost", type=str, help="IP of the host server (default: 127.0.0.1)")
 parser.add_argument("--port", default=2000, type=int, help="TCP port to listen to (default: 2000)")
@@ -19,12 +17,13 @@ parser.add_argument("--reload_model", type=str, default="", help="Path to a mode
 parser.add_argument("--no_render", action="store_false", help="If True, render the environment")
 parser.add_argument("--fps", type=int, default=15, help="FPS to render the environment")
 parser.add_argument("--num_checkpoints", type=int, default=CHECKPOINT_FREQ, help="Checkpoint frequency")
+
 parser.add_argument("--config", type=str, default="1", help="Config to use (default: 1)")
 
 args = vars(parser.parse_args())
 config.set_config(args["config"])
 
-from stable_baselines3 import PPO, DDPG, SAC
+from stable_baselines3 import PPO
 from stable_baselines3.common.callbacks import CheckpointCallback
 from stable_baselines3.common.logger import configure
 from carla_env.envs.carla_route_env import CarlaRouteEnv
@@ -43,7 +42,7 @@ total_timesteps = args["total_timesteps"]
 
 seed = CONFIG["seed"]
 
-algorithm_dict = {"PPO": PPO, "DDPG": DDPG, "SAC": SAC}
+algorithm_dict = {"PPO": PPO}
 if CONFIG["algorithm"] not in algorithm_dict:
     raise ValueError("Invalid algorithm name")
 
